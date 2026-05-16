@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #0f172a;
+  background-color: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #e2e8f0;
+    background-color: #0f172a;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding-bottom: 20px;
+  background-color: #f8fafc;
+  background-image:
+    linear-gradient(rgba(186, 230, 253, 0.05), rgba(186, 230, 253, 0.5)),
+    url('./images/main-bg.jpg');
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-size: cover, cover;
+  color: #000;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+section {
+  box-sizing: border-box;
+  width: 275px;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+@media (min-width: 376px) {
+  section {
+    width: 540px;
+  }
+}
+
+@media (min-width: 769px) {
+  section {
+    width: 630px;
+  }
+}

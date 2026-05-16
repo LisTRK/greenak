@@ -1,0 +1,49 @@
+.main-btn {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 275px;
+  height: 73px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 60px auto;
+  padding: 0 30px;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(rgb(46, 208, 135) 0%, rgb(6, 181, 117) 100%);
+  border-radius: 90px;
+  border-bottom: 2px solid rgb(33, 173, 69);
+}
+
+.main-btn__label {
+  display: inline-block;
+  max-width: 100%;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  text-transform: uppercase;
+  font-family: 'Gilroy Bold', 'Gilroy', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+  background-image: url('../../images/right-arrow.svg');
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  padding-right: 20px;
+  position: relative;
+}
+
+@media (min-width: 376px) {
+  .main-btn {
+    max-width: 540px;
+    height: 115px;
+  }
+}
+
+@media (min-width: 769px) {
+  .main-btn {
+    max-width: 630px;
+    height: 91px;
+  }
+}
