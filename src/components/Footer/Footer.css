@@ -12,8 +12,8 @@
 
 .footer__logo {
   display: block;
-  width: auto;
-  max-width: min(160px, 42vw);
+  width: clamp(70px, min(32vw, 24vh), 150px);
   height: auto;
-  max-height: clamp(72px, 18vh, 120px);
+  max-height: 150px;
+  object-fit: contain;
 }

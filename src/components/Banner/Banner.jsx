@@ -5,14 +5,15 @@ function Banner() {
   return (
     <section className="banner" role="banner" aria-label="Промо банер">
       <div className="banner__inner">
-        <p className="banner__headline">
-          СОНЯЧНА СТАНЦІЯ <span className="banner__accent">30 КВТ</span>
-        </p>
-        <p className="banner__sub">
-          <span className="banner__accent banner__price">ЗА 9 999 $</span>
-          <span className="banner__sep" aria-hidden="true" />
-          <span>Окупність — меньше 2 років</span>
-        </p>
+        <div className="banner__headline">
+          <span className="banner__title">СОНЯЧНА СТАНЦІЯ</span>
+          <div className="banner__highlights">
+            <span className="banner__accent">30 КВТ</span>
+            <span className="banner__accent banner__price">ЗА 9 999 $</span>
+            <span className="banner__sep" aria-hidden="true" />
+          </div>
+        </div>
+        <p className="banner__sub">Окупність — меньше 2 років</p>
       </div>
 
       <div className="banner__hero-media">
