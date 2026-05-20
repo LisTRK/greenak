@@ -1,7 +1,7 @@
 .main-btn {
   box-sizing: border-box;
   width: 100%;
-  max-width: min(var(--button-max), max(275px, 100%), 100%);
+  max-width: min(60vw, var(--button-max), max(275px, 100%), 100%);
   height: clamp(
     73px,
     min(115px, max(73px, calc(0.195 * 100vw - 10px))),

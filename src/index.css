@@ -20,15 +20,16 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Рівні тексту для сторінки (rem залежать від html) */
-  --text-hero: clamp(1.25rem, 0.82rem + 2.2vw, 2.375rem);
+  /* Мінімум: 22px у масштабі rem (22/16); далі плавно до max; 1rem = база з html */
+  --text-hero: clamp(calc(22 / 16 * 1rem), 0.82rem + 2.2vw, 2.375rem);
   --text-section: clamp(1.25rem, 1.05rem + 1.35vw, 1.75rem);
   --text-body: clamp(0.9375rem, 0.88rem + 0.45vw, 1.0625rem);
   --text-ui: clamp(0.9375rem, 0.78rem + 0.95vw, 1.25rem);
   /* Відступи сторінки та ширина контенту без @media (max збігається з колишніми брейкпоінтами) */
   --page-pad: clamp(20px, 0.65rem + 2.2vw, 50px);
   --content-width: min(630px, max(275px, 100%), 100%);
-  --banner-max: 750px;
-  --button-max: 700px;
+  --banner-max: 550px;
+  --button-max: 350px;
 }
 
 @media (prefers-color-scheme: dark) {

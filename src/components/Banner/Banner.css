@@ -6,9 +6,9 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  width: min(var(--banner-max), max(275px, 100%), 100%);
+  width: min(80vw, var(--banner-max), max(275px, 100%), 100%);
   max-width: 100%;
-  /* Ті самі пропорції що 630×78; ширина до --banner-max */
+  /* Ті самі пропорції що 630×78; ширина до --banner-max, не більше 80vw */
   aspect-ratio: 630 / 78;
   min-height: 55px;
   box-shadow: 0 4px 24px rgba(41, 143, 241, 0.35);

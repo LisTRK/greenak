@@ -1,7 +1,6 @@
 import Footer from './components/Footer/Footer.jsx'
 import Hero from './components/Hero/Hero.jsx'
 import Projects from './components/Projects/Projects.jsx'
-import Sale from './components/Sale/Sale.jsx'
 import './App.css'
 
 function App() {
@@ -10,7 +9,6 @@ function App() {
       <Hero />
 
       <main className="main" aria-label="Головний вміст">
-        <Sale />
         <Projects />
       </main>
 
