@@ -10,7 +10,12 @@
   max-width: 100%;
   /* Ті самі пропорції що 630×78; ширина до --banner-max, не більше 80vw */
   aspect-ratio: 630 / 78;
-  min-height: 55px;
+  min-height: clamp(
+    70px,
+    calc(70px + 20 * clamp(0, (100vw - 320px) / (768px - 320px), 1)),
+    90px
+  );
+  max-height: 90px;
   box-shadow: 0 4px 24px rgba(41, 143, 241, 0.35);
   border-radius: 6px;
   overflow: hidden;
