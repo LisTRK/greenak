@@ -5,37 +5,47 @@
 }
 
 html {
-  /* База rem: плавно між вузьким і широким екраном, межі читабельності */
+  /* База rem: плавно між 15px та 17px залежно від екрану */
   font-size: clamp(15px, 0.3rem + 2.5vw, 17px);
+  /* Забезпечує плавний скрол до якірних посилань (наприклад, до квізу) */
+  scroll-behavior: smooth; 
 }
 
 :root {
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #0f172a;
-  background-color: #f8fafc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Рівні тексту для сторінки (rem залежать від html) */
-  /* Мінімум: 22px у масштабі rem (22/16); далі плавно до max; 1rem = база з html */
-  --text-hero: clamp(calc(22 / 16 * 1rem), 0.82rem + 2.2vw, 2.375rem);
+
+  /* Світла тема (за замовчуванням) */
+  --color-text: #0f172a;
+  --color-bg: #f8fafc;
+  /* Напівпрозорий блакитний градієнт, який ми обговорювали для Free Solar */
+  --bg-gradient: linear-gradient(rgba(186, 230, 253, 0.05), rgba(186, 230, 253, 0.5));
+
+  /* Рівні тексту (динамічні rem) */
+  --text-hero: clamp(1.375rem, 0.82rem + 2.2vw, 2.375rem); /* 22px / 16 = 1.375rem */
   --text-section: clamp(1.25rem, 1.05rem + 1.35vw, 1.75rem);
   --text-body: clamp(0.9375rem, 0.88rem + 0.45vw, 1.0625rem);
   --text-ui: clamp(0.9375rem, 0.78rem + 0.95vw, 1.25rem);
-  /* Відступи сторінки та ширина контенту без @media (max збігається з колишніми брейкпоінтами) */
+
+  /* Відступи сторінки та ширина контенту */
   --page-pad: clamp(20px, 0.65rem + 2.2vw, 50px);
   --content-width: min(630px, max(275px, 100%), 100%);
   --banner-max: 550px;
   --button-max: 350px;
 }
 
+/* Автоматична темна тема через змінні */
 @media (prefers-color-scheme: dark) {
   :root {
-    color: #e2e8f0;
-    background-color: #0f172a;
+    --color-text: #e2e8f0;
+    --color-bg: #0f172a;
+    /* У темній темі робимо градієнт темнішим, щоб сонячний фон не "випалював" очі */
+    --bg-gradient: linear-gradient(rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.8));
   }
 }
 
@@ -43,20 +53,23 @@ body {
   margin: 0;
   min-height: 100vh;
   font-size: var(--text-body);
+  color: var(--color-text);          /* ВИПРАВЛЕНО: тепер колір адаптивний */
+  background-color: var(--color-bg);  /* ВИПРАВЛЕНО: тепер фон адаптивний */
   padding-bottom: 20px;
-  background-color: #f8fafc;
-  background-image:
-    linear-gradient(rgba(186, 230, 253, 0.05), rgba(186, 230, 253, 0.5)),
-    url('./images/main-bg.jpg');
-  background-repeat: no-repeat, no-repeat;
-  background-position-x: center, 70%;
-  background-position-y: center, center;
-  background-size: cover, cover;
-  color: #000;
+  
+  /* Сучасний скорочений запис множинного фону */
+  background-image: var(--bg-gradient), url('./images/main-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  /* На мобільних (до 768px) показуємо праву частину зображення (діапазон 70-90%) */
+  background-position: center, 75% center; 
 }
+
+/* Коли екран стає більшим за планшет — малюнок центрується під заголовок */
 @media (min-width: 768px) {
   body {
-    background-position-x: 70%;
+    background-position: center, center center; /* ВИПРАВЛЕНО ЛОГІКУ */
   }
 }
 
@@ -64,9 +77,10 @@ body {
   min-height: 100vh;
 }
 
+/* Контейнер для секцій */
 section {
-  box-sizing: border-box;
   width: var(--content-width);
   max-width: 100%;
   margin-inline: auto;
+  padding-inline: var(--page-pad); /* Додано безпечні відступи для мобільних */
 }
