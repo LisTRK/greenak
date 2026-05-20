@@ -49,7 +49,10 @@ body {
     linear-gradient(rgba(186, 230, 253, 0.05), rgba(186, 230, 253, 0.5)),
     url('./images/main-bg.jpg');
   background-repeat: no-repeat, no-repeat;
-  background-position: center, center;
+  /* 320px → 10% (50%−40%), 768px+ → 50%; коеф. 0–1 через clamp */
+  background-position-x: center,
+    calc(50% - 40% * clamp(0, (768px - 100vw) / (768px - 320px), 1));
+  background-position-y: center, center;
   background-size: cover, cover;
   color: #000;
 }

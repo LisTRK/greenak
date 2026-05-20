@@ -34,7 +34,7 @@
   background-image: url('../../images/right-arrow.svg');
   background-position: right center;
   background-repeat: no-repeat;
-  background-size: clamp(10px, 0.65em, 14px);
-  padding-right: clamp(16px, 0.85em + 0.35rem, 22px);
+  background-size: clamp(13px, 0.85em, 18px);
+  padding-right: clamp(18px, 0.85em + 0.45rem, 24px);
   position: relative;
 }
