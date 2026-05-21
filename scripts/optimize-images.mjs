@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
 const srcImages = path.join(root, 'src', 'images')
 const publicImages = path.join(root, 'public', 'images')
-const metaPath = path.join(root, 'src', 'image-meta.json')
+const metaPath = path.join(root, 'src', 'assets', 'image-meta.json')
 
 await mkdir(publicImages, { recursive: true })
 
