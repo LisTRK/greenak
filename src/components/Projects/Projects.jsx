@@ -1,23 +1,51 @@
 import { useCallback, useState } from 'react'
-import img2 from '../../images/FreeSolar2.png'
-import img3 from '../../images/FreeSolar3.png'
-import img4 from '../../images/FreeSolar4.png'
+import img2Avif from '../../images/FreeSolar2.avif'
+import img2Webp from '../../images/FreeSolar2.webp'
+import img3Avif from '../../images/FreeSolar3.avif'
+import img3Webp from '../../images/FreeSolar3.webp'
+import img4Avif from '../../images/FreeSolar4.avif'
+import img4Webp from '../../images/FreeSolar4.webp'
+import meta from '../../image-meta.json'
 import './Projects.css'
 
 const slides = [
   {
-    src: img2,
+    id: 'FreeSolar2',
+    webp: img2Webp,
+    avif: img2Avif,
     alt: 'Велика наземна сонячна електростанція під хмарним небом',
   },
   {
-    src: img3,
+    id: 'FreeSolar3',
+    webp: img3Webp,
+    avif: img3Avif,
     alt: 'Ряд сонячних панелей на відкритій ділянці',
   },
   {
-    src: img4,
+    id: 'FreeSolar4',
+    webp: img4Webp,
+    avif: img4Avif,
     alt: 'Сонячні панелі на червоному даху будинку',
   },
 ]
+
+function SlideImage({ slide, eager }) {
+  const { width, height } = meta[slide.id]
+  return (
+    <picture>
+      <source type="image/avif" srcSet={slide.avif} />
+      <source type="image/webp" srcSet={slide.webp} />
+      <img
+        src={slide.webp}
+        alt={slide.alt}
+        width={width}
+        height={height}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    </picture>
+  )
+}
 
 function Projects() {
   const [index, setIndex] = useState(0)
@@ -48,8 +76,8 @@ function Projects() {
             style={{ transform: `translateX(-${index * 100}%)` }}
           >
             {slides.map((slide, i) => (
-              <li key={slide.src} className="projects__slide" aria-hidden={i !== index}>
-                <img src={slide.src} alt={slide.alt} loading={i === 0 ? 'eager' : 'lazy'} />
+              <li key={slide.id} className="projects__slide" aria-hidden={i !== index}>
+                <SlideImage slide={slide} eager={i === 0} />
               </li>
             ))}
           </ul>

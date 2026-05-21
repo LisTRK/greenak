@@ -44,6 +44,7 @@
   height: 100%;
 }
 
+.projects__slide picture,
 .projects__slide img {
   display: block;
   width: 100%;

@@ -54,6 +54,12 @@
   align-self: stretch;
 }
 
+.banner__hero-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .banner__photo {
   width: 100%;
   height: 100%;

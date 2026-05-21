@@ -1,5 +1,9 @@
-import panelImg from '../../images/solnechnyhPanel.jpg'
+import panelAvif from '../../images/solnechnyhPanel.avif'
+import panelWebp from '../../images/solnechnyhPanel.webp'
+import meta from '../../image-meta.json'
 import './Banner.css'
+
+const { width, height } = meta.solnechnyhPanel
 
 function Banner() {
   return (
@@ -17,11 +21,19 @@ function Banner() {
       </div>
 
       <div className="banner__hero-media">
-        <img
-          className="banner__photo"
-          src={panelImg}
-          alt="Приватний будинок із сонячними панелями на даху"
-        />
+        <picture>
+          <source type="image/avif" srcSet={panelAvif} />
+          <source type="image/webp" srcSet={panelWebp} />
+          <img
+            className="banner__photo"
+            src={panelWebp}
+            alt="Приватний будинок із сонячними панелями на даху"
+            width={width}
+            height={height}
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <p className="banner__profit">6 480 євро прибутку на рік</p>
       </div>
     </section>
