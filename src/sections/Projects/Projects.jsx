@@ -1,162 +1,6 @@
-import { useCallback, useState, useEffect } from 'react'
-import meta from '@/assets/image-meta.json'
-import './Projects.css'
 
-// --- ОПТИМІЗАЦІЯ LCP ---
-// Імпортуємо ПЕРШИЙ слайд статично. Браузер побачить його адресу в HTML одразу.
-import img2Avif from '@/images/FreeSolar2.avif'
-import img2Webp from '@/images/FreeSolar2.webp'
 
-const slidesData = [
-  { 
-    id: 'FreeSolar2', 
-    alt: 'Велика наземна сонячна електростанція під хмарним небом',
-    // Передаємо готові шляхи для першого слайду
-    staticSrc: { avif: img2Avif, webp: img2Webp }
-  },
-  { id: 'FreeSolar3', alt: 'Ряд сонячних панелей на відкритій ділянці' },
-  { id: 'FreeSolar4', alt: 'Сонячні панелі на червоному даху будинку' },
-]
 
-function Projects() {
-  const [index, setIndex] = useState(0)
-  const count = slidesData.length
-
-  // Ініціалізуємо стан вже з готовими шляхами для першого слайду
-  const [loadedSrcs, setLoadedSrcs] = useState({
-    FreeSolar2: slidesData[0].staticSrc
-  })
-
-  const currentSlide = slidesData[index]
-
-  const loadImagesForSlide = useCallback(async (slideId) => {
-    if (loadedSrcs[slideId]) return
-
-    try {
-      const [avifModule, webpModule] = await Promise.all([
-        import(`@/images/${slideId}.avif`),
-        import(`@/images/${slideId}.webp`),
-      ])
-
-      setLoadedSrcs((prev) => ({
-        ...prev,
-        [slideId]: {
-          avif: avifModule.default,
-          webp: webpModule.default,
-        },
-      }))
-    } catch (error) {
-      console.error(`Помилка завантаження картинок для ${slideId}:`, error)
-    }
-  }, [loadedSrcs])
-
-  // ОПТИМІЗАЦІЯ КРИТИЧНОГО ЛАНЦЮЖКА:
-  // Не вантажимо інші слайди миттєво. Чекаємо 1.5 секунди після запуску сайту,
-  // щоб браузер встиг намалювати перший екран і звільнити потік (TBT -> 0).
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // Завантажуємо другий і третій слайди у фоні, коли користувач відпочиває
-      loadImagesForSlide('FreeSolar3')
-      loadImagesForSlide('FreeSolar4')
-    }, 1500)
-
-    return () => clearTimeout(timer)
-  }, [loadImagesForSlide])
-
-  const goPrev = useCallback(() => {
-    setIndex((i) => (i - 1 + count) % count)
-  }, [count])
-
-  const goNext = useCallback(() => {
-    setIndex((i) => (i + 1) % count)
-  }, [count])
-
-  return (
-    <section className="projects" aria-labelledby="projects-heading">
-      <h2 id="projects-heading" className="projects__title">
-        Наші реалізовані проекти
-      </h2>
-      <div
-        className="projects__carousel"
-        role="region"
-        aria-roledescription="карусель"
-        aria-label="Фото сонячних електростанцій"
-      >
-        <div className="projects__viewport">
-          <ul
-            className="projects__track"
-            style={{ transform: `translateX(-${index * 100}%)` }}
-          >
-            {slidesData.map((slide, i) => {
-              const { width, height } = meta[slide.id]
-              const srcs = loadedSrcs[slide.id]
-
-              return (
-                <li key={slide.id} className="projects__slide" aria-hidden={i !== index}>
-                  {srcs ? (
-                    <picture>
-                      <source type="image/avif" srcSet={srcs.avif} />
-                      <source type="image/webp" srcSet={srcs.webp} />
-                      <img
-                        src={srcs.webp}
-                        alt={slide.alt}
-                        width={width}
-                        height={height}
-                        // Для першого слайду вимикаємо lazy і додаємо fetchpriority через атрибути
-                        loading={i === 0 ? 'eager' : 'lazy'}
-                        {...(i === 0 ? { fetchpriority: 'high' } : {})}
-                        decoding="async"
-                      />
-                    </picture>
-                  ) : (
-                    <div style={{ width: '100%', height: 'auto', aspectRatio: `${width}/${height}` }} />
-                  )}
-                </li>
-              )
-            })}
-          </ul>
-
-          <div className="projects__controls">
-            <button
-              type="button"
-              className="projects__nav projects__nav--prev"
-              onClick={goPrev}
-              aria-label="Попереднє фото"
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              className="projects__nav projects__nav--next"
-              onClick={goNext}
-              aria-label="Наступне фото"
-            >
-              ›
-            </button>
-          </div>
-        </div>
-
-        <div className="projects__dots">
-          {slidesData.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              className="projects__dot"
-              data-active={i === index}
-              aria-current={i === index ? 'true' : undefined}
-              aria-label={`Слайд ${i + 1} з ${count}`}
-              onClick={() => setIndex(i)}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export default Projects;
-
-/*
 import { useCallback, useState, useEffect } from 'react'
 import meta from '@/assets/image-meta.json'
 import './Projects.css'
@@ -241,14 +85,8 @@ function Projects() {
 
               return (
                 <li key={slide.id} className="projects__slide" aria-hidden={i !== index}>
-                  {/* 
-                    МАГІЯ ТУТ: Якщо srcs ще не завантажилися для ЦЬОГО слайду, 
-                    але цей слайд зараз активний (i === index) — ми НЕ показуємо білий екран.
-                    Завдяки CSS-трансформації `translateX` та структурі списку `<ul>`, 
-                    користувач просто продовжуватиме бачити попередній слайд на екрані, 
-                    поки цей фоном довантажується!
-                  }*/
-                 /*
+                  
+                 
                   {srcs ? (
                     <picture>
                       <source type="image/avif" srcSet={srcs.avif} />
@@ -310,7 +148,7 @@ function Projects() {
 }
 
 export default Projects
-*/
+
 
 /*
 import { useCallback, useState } from 'react'

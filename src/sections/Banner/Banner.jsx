@@ -17,7 +17,7 @@ function Banner() {
             <span className="banner__sep" aria-hidden="true" />
           </div>
         </div>
-        <p className="banner__sub">Окупність — меньше 2 років</p>
+        <p className="banner__sub">Окупність — менше 2 років</p>
       </div>
 
       <div className="banner__hero-media">
