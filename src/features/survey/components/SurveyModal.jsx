@@ -24,6 +24,7 @@ function SurveyModal({ open, onClose }) {
   const totalSteps = SURVEY_STEPS.length
   const isDone = status === 'success'
   const isContact = step?.type === 'contact'
+  const isLastStep = stepIndex === totalSteps - 1
   const showNextButton = !isDone && step?.type !== 'choice'
   const canProceed = canProceedStep(step, answers)
 
@@ -69,7 +70,7 @@ function SurveyModal({ open, onClose }) {
   }
 
   const goNext = async () => {
-    if (isContact) {
+    if (isLastStep) {
       setStatus('submitting')
       setError('')
       try {
@@ -160,7 +161,7 @@ function SurveyModal({ open, onClose }) {
   }
 
   const nextLabel =
-    status === 'submitting' ? 'Надсилання…' : isContact ? 'Надіслати' : 'Далі'
+    status === 'submitting' ? 'Надсилання…' :  'Надіслати' 
 
   return (
     <dialog
@@ -186,9 +187,9 @@ function SurveyModal({ open, onClose }) {
 
         <div className="survey-modal__body">{renderBody()}</div>
 
-        {!isDone && showNextButton && (
+        {!isDone && isLastStep && (
           <footer className="survey-modal__footer">
-            {stepIndex > 0 && status !== 'submitting' ? (
+            {/* {stepIndex > 0 && status !== 'submitting' ? (
               <button
                 type="button"
                 className="survey-modal__btn survey-modal__btn--back"
@@ -196,14 +197,14 @@ function SurveyModal({ open, onClose }) {
               >
                 Назад
               </button>
-            ) : null}
+            ) : null} */}
             <button
               type="button"
               className="survey-modal__btn survey-modal__btn--next"
               disabled={!canProceed || status === 'submitting'}
               onClick={goNext}
             >
-              {nextLabel}
+              Надіслати
             </button>
           </footer>
         )}
