@@ -59,7 +59,6 @@ const srcset = (map) =>
   `${map[640]} 640w, ${map[1280]} 1280w, ${map[1920]} 1920w`
 
 function PageBackground() {
-  // Захист від помилки "Cannot read properties of undefined"
   const imgWidth = meta?.mainBg?.width || 1920;
   const imgHeight = meta?.mainBg?.height || 1080;
 
@@ -76,7 +75,7 @@ function PageBackground() {
           alt=""
           width={imgWidth}
           height={imgHeight}
-          {...{ fetchPriority: 'high' }} /* ВИПРАВЛЕНО: тільки нижній регістр */
+          {...{ fetchPriority: 'high' }} 
           decoding="async"
         />
       </picture>
