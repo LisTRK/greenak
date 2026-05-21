@@ -217,6 +217,7 @@ button {
   font-size: 1.25rem;
   line-height: 1;
   cursor: pointer;
+  z-index: 999;
 }
 
 .survey-modal__close:hover {
