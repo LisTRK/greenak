@@ -1,7 +1,7 @@
 import Button from '../Button/Button.jsx'
 import './Sale.css'
 
-function Sale() {
+function Sale({ onSurveyOpen }) {
   return (
     <section className="sale" aria-label="Сонячна електростанція під ключ">
       <div className="sale__inner">
@@ -10,7 +10,7 @@ function Sale() {
           Переходьте на власну генерацію під ключ: гарантована енергонезалежність та
           економія на десятиліття.
         </h2>
-        <Button />
+        <Button onClick={onSurveyOpen} />
       </div>
     </section>
   )

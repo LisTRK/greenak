@@ -1,3 +1,23 @@
+# Greenak
+
+Лендінг сонячних станцій (React + Vite).
+
+## Опитувальник і листи на пошту
+
+Кнопка «Підібрати станцію» відкриває багатокроковий опитувальник. Відправка — через [Web3Forms](https://web3forms.com) (без власного сервера).
+
+1. Зареєструйтесь на web3forms.com і вкажіть email для заявок.
+2. Скопіюйте Access Key у файл `.env`:
+
+```env
+VITE_WEB3FORMS_ACCESS_KEY=ваш_ключ
+```
+
+3. На Vercel / Netlify додайте ту саму змінну в Environment Variables.
+4. Перезапустіть `npm run dev` або зробіть redeploy.
+
+---
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
