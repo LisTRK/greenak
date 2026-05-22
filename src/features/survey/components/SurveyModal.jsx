@@ -160,8 +160,17 @@ function SurveyModal({ open, onClose }) {
     }
   }
 
-  const nextLabel =
-    status === 'submitting' ? 'Надсилання…' :  'Надіслати' 
+  const getNextLabel = () => {
+    if (status === 'submitting') return 'Надсилання…'
+    if (isLastStep) return 'Надіслати'
+    return 'Далі'
+  }
+  
+  // 2. Умова блокування кнопки (якщо не валідно АБО йде відправка)
+  const isNextDisabled = !canProceed || status === 'submitting'
+  
+  // 3. Чи взагалі потрібно показувати кнопку "Далі / Надіслати" на цьому кроці
+  const shouldShowNext = showNextButton || isLastStep
 
   return (
     <dialog
@@ -187,27 +196,32 @@ function SurveyModal({ open, onClose }) {
 
         <div className="survey-modal__body">{renderBody()}</div>
 
-        {!isDone && isLastStep && (
-          <footer className="survey-modal__footer">
-            {/* {stepIndex > 0 && status !== 'submitting' ? (
-              <button
-                type="button"
-                className="survey-modal__btn survey-modal__btn--back"
-                onClick={goBack}
-              >
-                Назад
-              </button>
-            ) : null} */}
-            <button
-              type="button"
-              className="survey-modal__btn survey-modal__btn--next"
-              disabled={!canProceed || status === 'submitting'}
-              onClick={goNext}
-            >
-              Надіслати
-            </button>
-          </footer>
-        )}
+        {!isDone && (
+  <footer className="survey-modal__footer">
+    {/* Кнопка "Назад" (ховається на 1-му кроці або під час відправки) */}
+    {/* {stepIndex > 0 && status !== 'submitting' && (
+      <button
+        type="button"
+        className="survey-modal__btn survey-modal__btn--back"
+        onClick={goBack}
+      >
+        Назад
+      </button>
+    )} */}
+
+    {/* Єдина, повністю динамічна головна кнопка */}
+    {shouldShowNext && (
+      <button
+        type="button"
+        className="survey-modal__btn survey-modal__btn--next"
+        disabled={isNextDisabled}
+        onClick={goNext}
+      >
+        {getNextLabel()}
+      </button>
+    )}
+  </footer>
+)}
 
         {isDone && (
           <footer className="survey-modal__footer">
