@@ -8,7 +8,7 @@
   text-align: center;
   font-size: var(--text-section);
   line-height: 1.25;
-  font-family: 'Gilroy Bold', 'Gilroy', system-ui, sans-serif;
+  font-family: "Gilroy Bold", "Gilroy", system-ui, sans-serif;
   font-weight: 700;
   color: inherit;
 }
@@ -62,8 +62,8 @@
   top: 50%;
   translate: 0 -50%;
   z-index: 2;
-  width: clamp(36px, 5cqi + 30px, 40px);
-  height: clamp(36px, 5cqi + 30px, 40px);
+  width: clamp(44px, 5cqi + 30px, 48px);
+  height: clamp(44px, 5cqi + 30px, 48px);
   padding: 0;
   border: none;
   border-radius: 50%;
@@ -100,8 +100,10 @@
 }
 
 .projects__dot {
-  width: 10px;
-  height: 10px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
   border: none;
   border-radius: 50%;
@@ -109,9 +111,14 @@
   cursor: pointer;
 }
 
-.projects__dot[data-active='true'] {
+.projects__dot[data-active="true"] {
   background: #63f129;
-  transform: scale(1.15);
+  transform: scale(1.05);
+}
+
+.projects__dot:focus-visible {
+  outline: 3px solid #63f129;
+  outline-offset: 3px;
 }
 
 .projects__dot:focus-visible {

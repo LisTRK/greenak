@@ -2,6 +2,14 @@ button {
   z-index: 999;
 }
 
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(16, 185, 129, 0.92);
+  outline-offset: 3px;
+}
+
 .survey-modal::backdrop {
   background: rgba(15, 23, 42, 0.55);
   backdrop-filter: blur(4px);
@@ -29,10 +37,7 @@ button {
 .survey-modal__header {
   flex-shrink: 0;
   padding: 1rem 1.25rem 0.75rem;
-  background: linear-gradient(
-    rgb(46, 208, 135) 0%,
-    rgb(6, 181, 117) 100%
-  );
+  background: linear-gradient(rgb(46, 208, 135) 0%, rgb(6, 181, 117) 100%);
   color: #fff;
 }
 
@@ -47,7 +52,7 @@ button {
   margin: 0;
   font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
   line-height: 1.35;
-  font-family: 'Gilroy Bold', 'Gilroy', system-ui, sans-serif;
+  font-family: "Gilroy Bold", "Gilroy", system-ui, sans-serif;
   font-weight: 700;
 }
 
@@ -97,7 +102,9 @@ button {
   font-size: 0.9375rem;
   line-height: 1.35;
   text-align: left;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
 .survey-modal__option:hover {
@@ -138,7 +145,8 @@ button {
 }
 
 .survey-modal__field input:focus {
-  outline: none;
+  outline: 3px solid rgba(6, 181, 117, 0.9);
+  outline-offset: 2px;
   border-color: rgb(6, 181, 117);
 }
 
@@ -150,7 +158,8 @@ button {
 }
 
 .survey-modal__skip {
-  padding: 0.5rem 0.75rem;
+  min-height: 44px;
+  padding: 0.65rem 0.85rem;
   border: none;
   border-radius: 8px;
   background: rgba(15, 23, 42, 0.08);
@@ -179,7 +188,7 @@ button {
   border: none;
   border-radius: 90px;
   font-size: 0.9375rem;
-  font-family: 'Gilroy Bold', 'Gilroy', system-ui, sans-serif;
+  font-family: "Gilroy Bold", "Gilroy", system-ui, sans-serif;
   font-weight: 700;
   cursor: pointer;
 }
@@ -196,10 +205,7 @@ button {
 }
 
 .survey-modal__btn--next {
-  background: linear-gradient(
-    rgb(46, 208, 135) 0%,
-    rgb(6, 181, 117) 100%
-  );
+  background: linear-gradient(rgb(46, 208, 135) 0%, rgb(6, 181, 117) 100%);
   color: #fff;
 }
 
